@@ -1,13 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	>
+<LinearLayout
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:gravity="top"
+	>
 <TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="Hello World, BinEdit"
-    />
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="Hello World, BinEdit"
+	/>
 </LinearLayout>
-
+<LinearLayout
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:gravity="bottom"
+	>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:paddingBottom="10pt"
+	>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:gravity="left"
+	>
+<Button
+	android:id="@+id/btn0"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginRight="2pt"
+	/>
+<Button
+	android:id="@+id/btn1"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginRight="2pt"
+	/>
+<Button
+	android:id="@+id/btn2"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginRight="2pt"
+	/>
+<Button
+	android:id="@+id/btn3"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	/>
+</LinearLayout>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:gravity="right"
+	>
+<Button
+	android:id="@+id/btn4"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	/>
+<Button
+	android:id="@+id/btn5"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginLeft="2pt"
+	/>
+<Button
+	android:id="@+id/btn6"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginLeft="2pt"
+	/>
+<Button
+	android:id="@+id/btn7"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginLeft="2pt"
+	/>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:paddingBottom="10pt"
+	>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:gravity="left"
+	>
+<Button
+	android:id="@+id/btn8"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginRight="2pt"
+	/>
+<Button
+	android:id="@+id/btn9"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginRight="2pt"
+	/>
+<Button
+	android:id="@+id/btna"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginRight="2pt"
+	/>
+<Button
+	android:id="@+id/btnb"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	/>
+</LinearLayout>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:gravity="right"
+	>
+<Button
+	android:id="@+id/btnc"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	/>
+<Button
+	android:id="@+id/btnd"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginLeft="2pt"
+	/>
+<Button
+	android:id="@+id/btne"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginLeft="2pt"
+	/>
+<Button
+	android:id="@+id/btnf"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	android:layout_marginLeft="2pt"
+	/>
+</LinearLayout>
+</LinearLayout>
+</LinearLayout>
+</LinearLayout>
