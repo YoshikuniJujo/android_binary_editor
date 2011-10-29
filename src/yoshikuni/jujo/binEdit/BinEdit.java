@@ -10,6 +10,10 @@ import android.view.View;
 
 import android.util.Log;
 
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
+
 public class BinEdit extends Activity
 {
 	private TextView textview;
@@ -31,6 +35,13 @@ public class BinEdit extends Activity
 
 	private void setButtonAction()
 	{
+		WindowManager wm = getWindowManager();
+		Display display = wm.getDefaultDisplay();
+		DisplayMetrics metrics = new DisplayMetrics();
+		display.getMetrics(metrics);
+
+		int widthPixels = metrics.widthPixels;
+
 		Button[] btns = new Button[16];
 		Button bsbtn;
 
@@ -51,10 +62,14 @@ public class BinEdit extends Activity
 		btns[14] = (Button)findViewById(R.id.btne);
 		btns[15] = (Button)findViewById(R.id.btnf);
 		for (int i = 0; i < 16; i++) {
+			btns[i].setWidth(widthPixels / 9);
+			btns[i].setHeight(widthPixels / 9);
 			btns[i].setOnClickListener(
 				new ButtonClickListener(edit, textview, i));
 		}
 		bsbtn = (Button)findViewById(R.id.backspace);
+		bsbtn.setWidth(widthPixels / 9);
+		bsbtn.setHeight(widthPixels / 9);
 		bsbtn.setOnClickListener(
 			new ButtonClickListener(edit, textview, -1));
 	}
