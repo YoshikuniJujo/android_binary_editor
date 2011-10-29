@@ -10,16 +10,19 @@ import android.view.View;
 
 public class BinEdit extends Activity
 {
-	TextView textview;
+	private TextView textview;
+	private Edit edit;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
- 	       setContentView(R.layout.main);
+		setContentView(R.layout.main);
 
 		textview = (TextView)findViewById(R.id.textview);
-		textview.setText("hello\12");
+
+		edit = new Edit();
 
 		setButtonAction();
 	}
@@ -45,7 +48,30 @@ public class BinEdit extends Activity
 		btns[15] = (Button)findViewById(R.id.btnf);
 		for (int i = 0; i < 16; i++) {
 			btns[i].setOnClickListener(
-				new ButtonClickListener(textview, i));
+				new ButtonClickListener(edit, textview, i));
+		}
+	}
+}
+
+class Edit
+{
+	private String str = "";
+	private int num = -1;
+
+	public String get() {
+		if ( num < 0 ) {
+			return str;
+		} else {
+			return str + "^" + num;
+		}
+	}
+
+	public void push(int n) {
+		if (num < 0) {
+			num = n;
+		} else {
+			str += (char)(num << 4 | n);
+			num = -1;
 		}
 	}
 }
@@ -53,18 +79,20 @@ public class BinEdit extends Activity
 class ButtonClickListener implements View.OnClickListener
 {
 	TextView textview;
-	int num;
 	int key;
+	Edit edit;
 
-	ButtonClickListener(TextView tv, int i)
+	ButtonClickListener(Edit ed, TextView tv, int i)
 	{
 		textview = tv;
 		key = i;
+		edit = ed;
 	}
 
 	@Override
 	public void onClick(View view)
 	{
-		textview.setText(Integer.toString(key));
+		edit.push(key);
+		textview.setText(edit.get());
 	}
 }
