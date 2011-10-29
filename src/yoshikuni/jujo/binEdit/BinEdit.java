@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import android.view.View;
 
+import android.util.Log;
+
 public class BinEdit extends Activity
 {
 	private TextView textview;
@@ -73,7 +75,15 @@ class Edit
 
 	public void push(int n) {
 		if (n < 0) {
-			str = str.substring(0, str.length() - 1);
+			if (num > -1) {
+				num = -1;
+			} else {
+				if (!str.equals("")) {
+					Log.e("backspace", "before str = " + str);
+					str = str.substring(0, str.length() - 1);
+					Log.e("backspace", "after str = " + str);
+				}
+			}
 		} else if (num < 0) {
 			num = n;
 		} else {
