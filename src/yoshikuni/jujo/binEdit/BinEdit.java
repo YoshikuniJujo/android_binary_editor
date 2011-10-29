@@ -30,6 +30,8 @@ public class BinEdit extends Activity
 	private void setButtonAction()
 	{
 		Button[] btns = new Button[16];
+		Button bsbtn;
+
 		btns[0] = (Button)findViewById(R.id.btn0);
 		btns[1] = (Button)findViewById(R.id.btn1);
 		btns[2] = (Button)findViewById(R.id.btn2);
@@ -50,6 +52,9 @@ public class BinEdit extends Activity
 			btns[i].setOnClickListener(
 				new ButtonClickListener(edit, textview, i));
 		}
+		bsbtn = (Button)findViewById(R.id.backspace);
+		bsbtn.setOnClickListener(
+			new ButtonClickListener(edit, textview, -1));
 	}
 }
 
@@ -67,7 +72,9 @@ class Edit
 	}
 
 	public void push(int n) {
-		if (num < 0) {
+		if (n < 0) {
+			str = str.substring(0, str.length() - 1);
+		} else if (num < 0) {
 			num = n;
 		} else {
 			str += (char)(num << 4 | n);

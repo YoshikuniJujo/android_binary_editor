@@ -27,6 +27,19 @@
 	android:orientation="horizontal"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
+	android:gravity="right"
+	android:paddingBottom="10pt"
+	>
+<Button
+	android:id="@+id/backspace"
+	android:layout_width="15pt"
+	android:layout_height="15pt"
+	/>
+</LinearLayout>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
 	android:paddingBottom="10pt"
 	>
 <LinearLayout
