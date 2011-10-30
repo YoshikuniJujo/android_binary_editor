@@ -14,6 +14,8 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import yoshikuni.jujo.binEdit.Edit;
+
 public class BinEdit extends Activity
 {
 	private TextView textview;
@@ -72,39 +74,6 @@ public class BinEdit extends Activity
 		bsbtn.setHeight(widthPixels / 9);
 		bsbtn.setOnClickListener(
 			new ButtonClickListener(edit, textview, -1));
-	}
-}
-
-class Edit
-{
-	private String str = "";
-	private int num = -1;
-
-	public String get() {
-		if ( num < 0 ) {
-			return str;
-		} else {
-			return str + "^" + num;
-		}
-	}
-
-	public void push(int n) {
-		if (n < 0) {
-			if (num > -1) {
-				num = -1;
-			} else {
-				if (!str.equals("")) {
-					Log.e("backspace", "before str = " + str);
-					str = str.substring(0, str.length() - 1);
-					Log.e("backspace", "after str = " + str);
-				}
-			}
-		} else if (num < 0) {
-			num = n;
-		} else {
-			str += (char)(num << 4 | n);
-			num = -1;
-		}
 	}
 }
 
