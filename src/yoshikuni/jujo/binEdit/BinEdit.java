@@ -45,7 +45,7 @@ public class BinEdit extends Activity
 		int widthPixels = metrics.widthPixels;
 
 		Button[] btns = new Button[16];
-		Button bsbtn;
+		Button bsbtn, left, right;
 
 		btns[0] = (Button)findViewById(R.id.btn0);
 		btns[1] = (Button)findViewById(R.id.btn1);
@@ -74,6 +74,16 @@ public class BinEdit extends Activity
 		bsbtn.setHeight(widthPixels / 9);
 		bsbtn.setOnClickListener(
 			new ButtonClickListener(edit, textview, -1));
+		left = (Button)findViewById(R.id.left);
+		right = (Button)findViewById(R.id.right);
+		left.setWidth(widthPixels / 9);
+		left.setHeight(widthPixels / 9);
+		right.setWidth(widthPixels / 9);
+		right.setHeight(widthPixels / 9);
+		left.setOnClickListener(
+			new ButtonClickListener(edit, textview, -2));
+		right.setOnClickListener(
+			new ButtonClickListener(edit, textview, -3));
 	}
 }
 
