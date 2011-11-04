@@ -19,6 +19,10 @@ import android.view.MenuItem;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.content.Intent;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
 
 import yoshikuni.jujo.binEdit.Edit;
 
@@ -26,6 +30,7 @@ public class BinEdit extends Activity
 {
 	private TextView textview;
 	private Edit edit;
+	private static SharedPreferences sp;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -39,6 +44,9 @@ public class BinEdit extends Activity
 		edit = new Edit();
 
 		setButtonAction();
+
+		sp = PreferenceManager.getDefaultSharedPreferences(this);
+		handler.post(runnable);
 	}
 
 	@Override
@@ -54,6 +62,8 @@ public class BinEdit extends Activity
 	{
 		switch(item.getItemId()) {
 		case 0:
+			Intent intent = new Intent(this, EditPref.class);
+			startActivity(intent);
 			break;
 		case 1:
 			setAlertDialog();
@@ -61,6 +71,15 @@ public class BinEdit extends Activity
 		}
 		return true;
 	}
+
+	static Handler handler = new Handler();
+	static Runnable runnable = new Runnable()
+	{
+		@Override
+		public void run()
+		{
+		}
+	};
 
 	private void setButtonAction()
 	{

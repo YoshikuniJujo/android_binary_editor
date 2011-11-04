@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="file">
+		<EditTextPreference
+			android:key="filePath"
+			android:title="path"
+			android:summary="file path"
+			android:dialogTitle="file path"
+			android:inputType="text"
+			/>
+	</PreferenceCategory>
+</PreferenceScreen>
