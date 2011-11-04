@@ -35,6 +35,6 @@ public class EditPref extends PreferenceActivity
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 		String key)
 	{
-//		BinEdit.handler.post(BinEdit.runnable);
+		BinEdit.handler.post(BinEdit.runnable);
 	}
 }

@@ -9,6 +9,7 @@ class Edit
 	private int num = -1;
 	private int bytes = 0;
 	private int cursor = 0;
+	private String path = "";
 
 	public static void main(String[] args) throws IOException
 	{
@@ -66,7 +67,6 @@ class Edit
 				utfBuf = 0; bytes = 0;
 			} else {
 				if (!str.equals("") && cursor > 0) {
-//					str = str.substring(0, str.length() - 1);
 					str = str.substring(0, cursor - 1)
 					+ str.substring(cursor, str.length());
 					cursor--;
@@ -85,6 +85,20 @@ class Edit
 		} else {
 			add(num << 4 | n);
 			num = -1;
+		}
+	}
+
+	public void setPath(String p) throws IOException
+	{
+		if (path != p) {
+			BufferedReader reader
+				= new BufferedReader(new FileReader(p));
+			str = "";
+			String line;
+			while ((line = reader.readLine()) != null) {
+				str += line;
+			}
+			path = p;
 		}
 	}
 

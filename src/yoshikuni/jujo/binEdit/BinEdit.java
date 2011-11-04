@@ -1,5 +1,7 @@
 package yoshikuni.jujo.binEdit;
 
+import java.io.*;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -28,8 +30,8 @@ import yoshikuni.jujo.binEdit.Edit;
 
 public class BinEdit extends Activity
 {
-	private TextView textview;
-	private Edit edit;
+	static private TextView textview;
+	static private Edit edit;
 	private static SharedPreferences sp;
 
 	/** Called when the activity is first created. */
@@ -78,6 +80,14 @@ public class BinEdit extends Activity
 		@Override
 		public void run()
 		{
+			if (sp.contains("filePath")) {
+				try {
+					edit.setPath(sp.getString("filePath", ""));
+					textview.setText(edit.get());
+				} catch (IOException e) {
+					textview.setText("read error!");
+				}
+			}
 		}
 	};
 
