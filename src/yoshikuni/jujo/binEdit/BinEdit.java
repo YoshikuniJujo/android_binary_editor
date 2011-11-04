@@ -14,6 +14,12 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import android.view.Menu;
+import android.view.MenuItem;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 import yoshikuni.jujo.binEdit.Edit;
 
 public class BinEdit extends Activity
@@ -33,6 +39,27 @@ public class BinEdit extends Activity
 		edit = new Edit();
 
 		setButtonAction();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		menu.add(Menu.NONE, 0, 0, "open");
+		menu.add(Menu.NONE, 1, 1, "save");
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId()) {
+		case 0:
+			break;
+		case 1:
+			setAlertDialog();
+			break;
+		}
+		return true;
 	}
 
 	private void setButtonAction()
@@ -84,6 +111,35 @@ public class BinEdit extends Activity
 			new ButtonClickListener(edit, textview, -2));
 		right.setOnClickListener(
 			new ButtonClickListener(edit, textview, -3));
+	}
+
+	private void setAlertDialog()
+	{
+		AlertDialog.Builder alertDialogBuilder
+			= new AlertDialog.Builder(this);
+		alertDialogBuilder.setTitle("save?");
+		alertDialogBuilder.setPositiveButton("OK",
+			new DialogInterface.OnClickListener()
+			{
+				@Override
+				public void onClick(DialogInterface dialog,
+					int width)
+				{
+				}
+			}
+		);
+		alertDialogBuilder.setNegativeButton("Cancel",
+			new DialogInterface.OnClickListener()
+			{
+				@Override
+				public void onClick(DialogInterface dialog,
+					int width)
+				{
+				}
+			}
+		);
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
 	}
 }
 
