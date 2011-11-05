@@ -91,6 +91,10 @@ class Edit
 	public void setPath(String p) throws IOException
 	{
 		if (path != p) {
+			cursor = 0;
+			utfBuf = 0;
+			num = -1;
+			bytes = 0;
 			str = "";
 			try {
 				BufferedReader reader
