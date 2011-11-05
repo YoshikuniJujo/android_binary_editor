@@ -154,6 +154,11 @@ public class BinEdit extends Activity
 				public void onClick(DialogInterface dialog,
 					int width)
 				{
+					try {
+						edit.save();
+					} catch (IOException e) {
+						textview.setText("can't write");
+					}
 				}
 			}
 		);

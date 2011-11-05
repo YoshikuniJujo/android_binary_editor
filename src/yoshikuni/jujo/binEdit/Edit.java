@@ -91,15 +91,27 @@ class Edit
 	public void setPath(String p) throws IOException
 	{
 		if (path != p) {
-			BufferedReader reader
-				= new BufferedReader(new FileReader(p));
 			str = "";
-			String line;
-			while ((line = reader.readLine()) != null) {
-				str += line;
+			try {
+				BufferedReader reader
+					= new BufferedReader(new FileReader(p));
+				String line;
+				while ((line = reader.readLine()) != null) {
+					str += line;
+				}
+				reader.close();
+			} catch (FileNotFoundException e) {
 			}
 			path = p;
 		}
+	}
+
+	public void save() throws IOException
+	{
+		PrintWriter writer =
+			new PrintWriter(new BufferedWriter(new FileWriter(path)));
+		writer.print(str);
+		writer.close();
 	}
 
 	private void add(int c) {
