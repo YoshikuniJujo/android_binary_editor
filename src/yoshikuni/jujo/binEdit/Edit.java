@@ -101,7 +101,7 @@ class Edit
 					= new BufferedReader(new FileReader(p));
 				String line;
 				while ((line = reader.readLine()) != null) {
-					str += line;
+					str += line + "\n";
 				}
 				reader.close();
 			} catch (FileNotFoundException e) {
