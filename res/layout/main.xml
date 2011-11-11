@@ -23,11 +23,16 @@
 	android:layout_height="fill_parent"
 	android:gravity="bottom"
 	>
+<Button
+	android:id="@+id/up"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_marginLeft="10pt"
+	/>
 <LinearLayout
 	android:orientation="horizontal"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
-	android:paddingBottom="10pt"
 	>
 <LinearLayout
 	android:orientation="horizontal"
@@ -44,6 +49,25 @@
 	android:id="@+id/right"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
+	/>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	>
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	>
+<Button
+	android:id="@+id/down"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_marginBottom="10pt"
+	android:layout_marginLeft="10pt"
 	/>
 </LinearLayout>
 <LinearLayout

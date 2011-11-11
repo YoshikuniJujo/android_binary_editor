@@ -1,6 +1,7 @@
 package yoshikuni.jujo.binEdit;
 
 import java.io.*;
+import java.util.*;
 
 class Edit
 {
@@ -80,6 +81,14 @@ class Edit
 			if (num == -1 && utfBuf == 0 && cursor < str.length()) {
 				cursor++;
 			}
+		} else if (n == -4) {
+			if (num == -1 && utfBuf == 0 && cursor > 0) {
+				cursorUp();
+			}
+		} else if (n == -5) {
+			if (num == -1 && utfBuf == 0 && cursor < str.length()) {
+				cursorDown();
+			}
 		} else if (num < 0) {
 			num = n;
 		} else {
@@ -144,5 +153,46 @@ class Edit
 				cursor++;
 			}
 		}
+	}
+
+	private void cursorUp()
+	{
+		cursor = preIndex(str, '\n', cursor);
+	}
+
+	private void cursorDown()
+	{
+		cursor = postIndex(str, '\n', cursor) + 1;
+	}
+
+	private static int preIndex(String str, char c, int here)
+	{
+		Integer ret = 0;
+		LinkedList<Integer> ids = indices(str, c);
+		for (Iterator i = ids.iterator(); i.hasNext();) {
+			Integer tmp = (Integer)i.next();
+			if (tmp >= here) break;
+			ret = tmp;
+		}
+		return ret;
+	}
+
+	private static int postIndex(String str, char c, int here)
+	{
+		Integer ret = 0;
+		LinkedList<Integer> ids = indices(str, c);
+		for (Iterator i = ids.iterator(); i.hasNext();) {
+			ret = (Integer)i.next();
+			if (ret > here) break;
+		}
+		return ret;
+	}
+
+	private static LinkedList<Integer> indices(String str, char c)
+	{
+		LinkedList<Integer> ret = new LinkedList<Integer>();
+		for (int i = 0; i < str.length(); i++)
+			if (str.charAt(i) == c) ret.add(i);
+		return ret;
 	}
 }
