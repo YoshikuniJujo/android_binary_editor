@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import android.widget.TextView;
+import android.widget.ScrollView;
+import android.widget.LinearLayout;
 import android.widget.Button;
 
 import android.view.View;
@@ -26,11 +28,15 @@ import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 
+import android.view.Window;
+
 import yoshikuni.jujo.binEdit.Edit;
 
 public class BinEdit extends Activity
 {
 	static private TextView textview;
+	static private ScrollView scrollview;
+	static private LinearLayout vbox;
 	static private Edit edit;
 	private static SharedPreferences sp;
 
@@ -39,9 +45,16 @@ public class BinEdit extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		Window window = getWindow();
+		window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		setContentView(R.layout.main);
 
 		textview = (TextView)findViewById(R.id.textview);
+		scrollview = (ScrollView)findViewById(R.id.scrollview);
+		vbox = (LinearLayout)findViewById(R.id.vbox);
 
 		edit = new Edit();
 
@@ -99,6 +112,7 @@ public class BinEdit extends Activity
 		display.getMetrics(metrics);
 
 		int widthPixels = metrics.widthPixels;
+		int heightPixels = metrics.heightPixels;
 
 		Button[] btns = new Button[16];
 		Button bsbtn, left, right, up, down;
@@ -150,6 +164,8 @@ public class BinEdit extends Activity
 			new ButtonClickListener(edit, textview, -4));
 		down.setOnClickListener(
 			new ButtonClickListener(edit, textview, -5));
+//		textview.setHeight(heightPixels / 3);
+//		vbox.setHeight(heightPixels / 3);
 	}
 
 	private void setAlertDialog()
