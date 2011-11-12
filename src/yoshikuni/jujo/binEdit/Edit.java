@@ -110,16 +110,13 @@ class Edit
 			num = -1;
 			bytes = 0;
 			str = "";
-			try {
-				BufferedReader reader
-					= new BufferedReader(new FileReader(p));
-				String line;
-				while ((line = reader.readLine()) != null) {
-					str += line + "\n";
-				}
-				reader.close();
-			} catch (FileNotFoundException e) {
+			BufferedReader reader
+				= new BufferedReader(new FileReader(p));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				str += line + "\n";
 			}
+			reader.close();
 			path = p;
 		}
 	}

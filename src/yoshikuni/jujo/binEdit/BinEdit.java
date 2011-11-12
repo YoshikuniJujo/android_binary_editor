@@ -6,17 +6,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import android.widget.TextView;
-import android.widget.ScrollView;
-import android.widget.LinearLayout;
 import android.widget.Button;
 
 import android.view.View;
-
-import android.util.Log;
-
-import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.WindowManager;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,17 +20,17 @@ import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 
-import android.view.Window;
+import android.widget.Toast;
 
+import yoshikuni.jujo.binEdit.Layout;
 import yoshikuni.jujo.binEdit.Edit;
 
 public class BinEdit extends Activity
 {
 	static private TextView textview;
-	static private ScrollView scrollview;
-	static private LinearLayout vbox;
 	static private Edit edit;
 	private static SharedPreferences sp;
+	private static Layout layout;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -46,15 +38,11 @@ public class BinEdit extends Activity
 	{
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		Window window = getWindow();
-		window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		layout = new Layout(this);
 
-		setContentView(R.layout.main);
+		setContentView(layout.mainView());
 
-		textview = (TextView)findViewById(R.id.textview);
-		scrollview = (ScrollView)findViewById(R.id.scrollview);
-		vbox = (LinearLayout)findViewById(R.id.vbox);
+		textview = layout.getField();
 
 		edit = new Edit();
 
@@ -97,6 +85,8 @@ public class BinEdit extends Activity
 				try {
 					edit.setPath(sp.getString("filePath", ""));
 					textview.setText(edit.get());
+				} catch (FileNotFoundException e) {
+					textview.setText("new file");
 				} catch (IOException e) {
 					textview.setText("read error!");
 				}
@@ -106,56 +96,24 @@ public class BinEdit extends Activity
 
 	private void setButtonAction()
 	{
-		WindowManager wm = getWindowManager();
-		Display display = wm.getDefaultDisplay();
-		DisplayMetrics metrics = new DisplayMetrics();
-		display.getMetrics(metrics);
-
-		int widthPixels = metrics.widthPixels;
-		int heightPixels = metrics.heightPixels;
-
 		Button[] btns = new Button[16];
 		Button bsbtn, left, right, up, down, copy, paste;
 
-		btns[0] = (Button)findViewById(R.id.btn0);
-		btns[1] = (Button)findViewById(R.id.btn1);
-		btns[2] = (Button)findViewById(R.id.btn2);
-		btns[3] = (Button)findViewById(R.id.btn3);
-		btns[4] = (Button)findViewById(R.id.btn4);
-		btns[5] = (Button)findViewById(R.id.btn5);
-		btns[6] = (Button)findViewById(R.id.btn6);
-		btns[7] = (Button)findViewById(R.id.btn7);
-		btns[8] = (Button)findViewById(R.id.btn8);
-		btns[9] = (Button)findViewById(R.id.btn9);
-		btns[10] = (Button)findViewById(R.id.btna);
-		btns[11] = (Button)findViewById(R.id.btnb);
-		btns[12] = (Button)findViewById(R.id.btnc);
-		btns[13] = (Button)findViewById(R.id.btnd);
-		btns[14] = (Button)findViewById(R.id.btne);
-		btns[15] = (Button)findViewById(R.id.btnf);
+		btns = layout.getButtons();
+
 		for (int i = 0; i < 16; i++) {
-			btns[i].setWidth(widthPixels / 9);
-			btns[i].setHeight(widthPixels / 9);
 			btns[i].setOnClickListener(
 				new ButtonClickListener(edit, textview, i));
 		}
-		bsbtn = (Button)findViewById(R.id.backspace);
-		bsbtn.setWidth(widthPixels / 9);
-		bsbtn.setHeight(widthPixels / 9);
+		bsbtn = layout.getFunctionButton(Layout.ButtonName.BackSpace);
 		bsbtn.setOnClickListener(
 			new ButtonClickListener(edit, textview, -1));
-		left = (Button)findViewById(R.id.left);
-		right = (Button)findViewById(R.id.right);
-		down = (Button)findViewById(R.id.down);
-		up = (Button)findViewById(R.id.up);
-		left.setWidth(widthPixels / 9);
-		left.setHeight(widthPixels / 9);
-		right.setWidth(widthPixels / 9);
-		right.setHeight(widthPixels / 9);
-		down.setWidth(widthPixels / 9);
-		down.setHeight(widthPixels / 9);
-		up.setWidth(widthPixels / 9);
-		up.setHeight(widthPixels / 9);
+		left	= layout.getFunctionButton(Layout.ButtonName.Left);
+		right	= layout.getFunctionButton(Layout.ButtonName.Right);
+		down	= layout.getFunctionButton(Layout.ButtonName.Down);
+		up	= layout.getFunctionButton(Layout.ButtonName.Up);
+		copy	= layout.getFunctionButton(Layout.ButtonName.Copy);
+		paste	= layout.getFunctionButton(Layout.ButtonName.Paste);
 		left.setOnClickListener(
 			new ButtonClickListener(edit, textview, -2));
 		right.setOnClickListener(
@@ -164,23 +122,15 @@ public class BinEdit extends Activity
 			new ButtonClickListener(edit, textview, -4));
 		down.setOnClickListener(
 			new ButtonClickListener(edit, textview, -5));
-		copy = (Button)findViewById(R.id.copy);
-		copy.setWidth(widthPixels / 9);
-		copy.setHeight(widthPixels / 9);
 		copy.setOnClickListener(
 			new ButtonClickListener(edit, textview, -6));
-		paste = (Button)findViewById(R.id.paste);
-		paste.setWidth(widthPixels / 9);
-		paste.setHeight(widthPixels / 9);
 		paste.setOnClickListener(
 			new ButtonClickListener(edit, textview, -7));
-//		textview.setHeight(heightPixels / 3);
-//		vbox.setHeight(heightPixels / 3);
-//		vbox.height = heightPixels / 3;
 	}
 
 	private void setAlertDialog()
 	{
+		final Activity act = this;
 		AlertDialog.Builder alertDialogBuilder
 			= new AlertDialog.Builder(this);
 		alertDialogBuilder.setTitle("save?");
@@ -194,7 +144,10 @@ public class BinEdit extends Activity
 					try {
 						edit.save();
 					} catch (IOException e) {
-						textview.setText("can't write");
+						Toast.makeText(act,
+							"can't write",
+							Toast.LENGTH_LONG).show();
+//						textview.setText("can't write");
 					}
 				}
 			}
