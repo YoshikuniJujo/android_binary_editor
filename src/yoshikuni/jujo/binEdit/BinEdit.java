@@ -38,14 +38,11 @@ public class BinEdit extends Activity
 	{
 		super.onCreate(savedInstanceState);
 
-		layout = new Layout(this);
-
+		edit		= new Edit();
+		layout		= new Layout(this);
 		setContentView(layout.mainView());
 
-		textview = layout.getField();
-
-		edit = new Edit();
-
+		textview	= layout.getField();
 		setButtonAction();
 
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -75,8 +72,8 @@ public class BinEdit extends Activity
 		return true;
 	}
 
-	static Handler handler = new Handler();
-	static Runnable runnable = new Runnable()
+	static Handler handler		= new Handler();
+	static Runnable runnable	= new Runnable()
 	{
 		@Override
 		public void run()
@@ -147,7 +144,6 @@ public class BinEdit extends Activity
 						Toast.makeText(act,
 							"can't write",
 							Toast.LENGTH_LONG).show();
-//						textview.setText("can't write");
 					}
 				}
 			}
