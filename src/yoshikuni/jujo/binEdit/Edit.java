@@ -167,7 +167,7 @@ class Edit
 
 	private void cursorDown()
 	{
-		cursor = postIndex(str, '\n', cursor) + 1;
+		cursor = postIndex2(str, '\n', cursor) + 1;
 	}
 
 	private void copy()
