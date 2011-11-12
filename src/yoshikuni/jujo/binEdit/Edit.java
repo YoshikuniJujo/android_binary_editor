@@ -6,6 +6,7 @@ import java.util.*;
 class Edit
 {
 	private String str = "";
+	private String buf = "";
 	private int utfBuf = 0;
 	private int num = -1;
 	private int bytes = 0;
@@ -89,6 +90,10 @@ class Edit
 			if (num == -1 && utfBuf == 0 && cursor < str.length()) {
 				cursorDown();
 			}
+		} else if (n == -6) {
+			copy();
+		} else if (n == -7) {
+			paste();
 		} else if (num < 0) {
 			num = n;
 		} else {
@@ -165,6 +170,31 @@ class Edit
 		cursor = postIndex(str, '\n', cursor) + 1;
 	}
 
+	private void copy()
+	{
+		buf = str.substring(preIndex2(str, '\n', cursor) + 1,
+			postIndex2(str, '\n', cursor) + 1);
+	}
+
+	private void paste()
+	{
+		int next = postIndex2(str, '\n', cursor) + 1;
+		str = str.substring(0, next) + buf
+			+ str.substring(next, str.length());
+	}
+
+	private static int preIndex2(String str, char c, int here)
+	{
+		Integer ret = -1;
+		LinkedList<Integer> ids = indices(str, c);
+		for (Iterator i = ids.iterator(); i.hasNext();) {
+			Integer tmp = (Integer)i.next();
+			if (tmp >= here) break;
+			ret = tmp;
+		}
+		return ret;
+	}
+
 	private static int preIndex(String str, char c, int here)
 	{
 		Integer ret = 0;
@@ -173,6 +203,17 @@ class Edit
 			Integer tmp = (Integer)i.next();
 			if (tmp >= here) break;
 			ret = tmp;
+		}
+		return ret;
+	}
+
+	private static int postIndex2(String str, char c, int here)
+	{
+		Integer ret = 0;
+		LinkedList<Integer> ids = indices(str, c);
+		for (Iterator i = ids.iterator(); i.hasNext();) {
+			ret = (Integer)i.next();
+			if (ret >= here) break;
 		}
 		return ret;
 	}

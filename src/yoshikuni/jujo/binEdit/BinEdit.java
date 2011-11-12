@@ -115,7 +115,7 @@ public class BinEdit extends Activity
 		int heightPixels = metrics.heightPixels;
 
 		Button[] btns = new Button[16];
-		Button bsbtn, left, right, up, down;
+		Button bsbtn, left, right, up, down, copy, paste;
 
 		btns[0] = (Button)findViewById(R.id.btn0);
 		btns[1] = (Button)findViewById(R.id.btn1);
@@ -164,8 +164,19 @@ public class BinEdit extends Activity
 			new ButtonClickListener(edit, textview, -4));
 		down.setOnClickListener(
 			new ButtonClickListener(edit, textview, -5));
+		copy = (Button)findViewById(R.id.copy);
+		copy.setWidth(widthPixels / 9);
+		copy.setHeight(widthPixels / 9);
+		copy.setOnClickListener(
+			new ButtonClickListener(edit, textview, -6));
+		paste = (Button)findViewById(R.id.paste);
+		paste.setWidth(widthPixels / 9);
+		paste.setHeight(widthPixels / 9);
+		paste.setOnClickListener(
+			new ButtonClickListener(edit, textview, -7));
 //		textview.setHeight(heightPixels / 3);
 //		vbox.setHeight(heightPixels / 3);
+//		vbox.height = heightPixels / 3;
 	}
 
 	private void setAlertDialog()
