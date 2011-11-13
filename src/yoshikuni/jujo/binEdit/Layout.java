@@ -30,7 +30,7 @@ class Layout
 	Activity activity;
 	int widthPixels;
 	int heightPixels;
-	Button down, paste, copy, backspace, left, right;
+	Button up, down, paste, copy, backspace, left, right;
 	Button[] keys = new Button[16];
 
 	Layout(Activity a)
@@ -54,8 +54,19 @@ class Layout
 			(LinearLayout)activity.findViewById(R.id.buttonField);
 		buttonField.setGravity(Gravity.BOTTOM);
 
-		LinearLayout lrLayout =
-			(LinearLayout)activity.findViewById(R.id.lrlayout);
+		LinearLayout.LayoutParams layoutparamsUpDown =
+			new LinearLayout.LayoutParams(widthPixels / 9,
+							heightPixels / 13);
+		layoutparamsUpDown.setMargins(widthPixels / 18, 0, 0, 0);
+
+		up = new Button(activity);
+		up.setLayoutParams(layoutparamsUpDown);
+		buttonField.addView(up);
+
+//		LinearLayout lrLayout =
+//			(LinearLayout)activity.findViewById(R.id.lrlayout);
+		LinearLayout lrLayout = new LinearLayout(activity);
+		buttonField.addView(lrLayout);
 		LinearLayout.LayoutParams layoutparamsLR =
 			new LinearLayout.LayoutParams(widthPixels / 9,
 							heightPixels / 13);
@@ -68,8 +79,11 @@ class Layout
 		lrLayout.addView(left);
 		lrLayout.addView(right);
 
-		LinearLayout deLayout =
-			(LinearLayout)activity.findViewById(R.id.delayout);
+//		LinearLayout deLayout =
+//			(LinearLayout)activity.findViewById(R.id.delayout);
+		LinearLayout deLayout = new LinearLayout(activity);
+		buttonField.addView(deLayout, new LinearLayout.LayoutParams(FP, WC));
+
 		LinearLayout downLayout = new LinearLayout(activity);
 		deLayout.addView(downLayout);
 
@@ -77,20 +91,15 @@ class Layout
 		editLayout.setGravity(Gravity.RIGHT);
 		deLayout.addView(editLayout,
 			new LinearLayout.LayoutParams(FP, WC));
-
-		LinearLayout.LayoutParams layoutparamsDown =
-			new LinearLayout.LayoutParams(widthPixels / 9,
-							heightPixels / 13);
 		LinearLayout.LayoutParams layoutparams =
 			new LinearLayout.LayoutParams(widthPixels / 9,
 							heightPixels / 13);
-		layoutparamsDown.setMargins(widthPixels / 18, 0, 0, 0);
 		layoutparams.setMargins(0, 0, 0, heightPixels / 40);
 		down		= new Button(activity);
 		paste		= new Button(activity);
 		copy		= new Button(activity);
 		backspace	= new Button(activity);
-		down.setLayoutParams(layoutparamsDown);
+		down.setLayoutParams(layoutparamsUpDown);
 		paste.setLayoutParams(layoutparams);
 		copy.setLayoutParams(layoutparams);
 		backspace.setLayoutParams(layoutparams);
@@ -104,8 +113,11 @@ class Layout
 							heightPixels / 13);
 		layoutparamsKey.setMargins(0, 0, 0, 0);
 
-		LinearLayout btn03 =
-			(LinearLayout)activity.findViewById(R.id.btn03);
+		LinearLayout btn07 = new LinearLayout(activity);
+		buttonField.addView(btn07, new LinearLayout.LayoutParams(FP, WC));
+
+		LinearLayout btn03 = new LinearLayout(activity);
+		btn07.addView(btn03);
 		int i = 0;
 		for (; i < 4; i++) {
 			keys[i] = new Button(activity);
@@ -113,29 +125,35 @@ class Layout
 			btn03.addView(keys[i]);
 		}
 
-		LinearLayout btn47 =
-			(LinearLayout)activity.findViewById(R.id.btn47);
+		LinearLayout btn47 = new LinearLayout(activity);
+		btn47.setGravity(Gravity.RIGHT);
+		btn07.addView(btn47, new LinearLayout.LayoutParams(FP, WC));
+
 		for (; i < 8; i++) {
 			keys[i] = new Button(activity);
 			keys[i].setLayoutParams(layoutparamsKey);
 			btn47.addView(keys[i]);
 		}
 
-		LinearLayout btn8b =
-			(LinearLayout)activity.findViewById(R.id.btn8b);
+		LinearLayout btn8f = new LinearLayout(activity);
+		buttonField.addView(btn8f, new LinearLayout.LayoutParams(FP, WC));
+
+		LinearLayout btn8b = new LinearLayout(activity);
+		btn8f.addView(btn8b);
 		for (; i < 12; i++) {
 			keys[i] = new Button(activity);
 			keys[i].setLayoutParams(layoutparamsKey);
 			btn8b.addView(keys[i]);
 		}
 
-		LinearLayout btncf =
-			(LinearLayout)activity.findViewById(R.id.btncf);
+		LinearLayout btncf = new LinearLayout(activity);
+		btncf.setGravity(Gravity.RIGHT);
 		for (; i < 16; i++) {
 			keys[i] = new Button(activity);
 			keys[i].setLayoutParams(layoutparamsKey);
 			btncf.addView(keys[i]);
 		}
+		btn8f.addView(btncf, new LinearLayout.LayoutParams(FP, WC));
 	}
 
 	public int mainView()
@@ -155,12 +173,6 @@ class Layout
 			keys[4], keys[5], keys[6], keys[7],
 			keys[8], keys[9], keys[10], keys[11],
 			keys[12], keys[13], keys[14], keys[15],
-/*
-			(Button)activity.findViewById(R.id.btnc),
-			(Button)activity.findViewById(R.id.btnd),
-			(Button)activity.findViewById(R.id.btne),
-			(Button)activity.findViewById(R.id.btnf),
-*/
 		};
 
 		for (int i = 0; i < btns.length; i++)
@@ -173,8 +185,8 @@ class Layout
 	{
 
 		Button[] btns = {
-			(Button)activity.findViewById(R.id.up),
-			down, left, right,
+//			(Button)activity.findViewById(R.id.up),
+			up, down, left, right,
 			paste, copy, backspace,
 		};
 
