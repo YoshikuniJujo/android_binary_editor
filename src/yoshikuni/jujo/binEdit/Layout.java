@@ -15,6 +15,7 @@ import android.view.Window;
 
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ScrollView;
 
 import android.view.Gravity;
 
@@ -27,11 +28,12 @@ class Layout
 		Up, Down, Left, Right, Paste, Copy, BackSpace
 	}
 
-	Activity activity;
-	int widthPixels;
-	int heightPixels;
-	Button up, down, paste, copy, backspace, left, right;
-	Button[] keys = new Button[16];
+	private Activity activity;
+	private int widthPixels;
+	private int heightPixels;
+	private Button up, down, paste, copy, backspace, left, right;
+	private Button[] keys = new Button[16];
+	private TextView field;
 
 	Layout(Activity a)
 	{
@@ -50,9 +52,20 @@ class Layout
 
 		activity.setContentView(mainView());
 
-		LinearLayout buttonField =
-			(LinearLayout)activity.findViewById(R.id.buttonField);
+		LinearLayout topLayout =
+			(LinearLayout)activity.findViewById(R.id.topLayout);
+
+		ScrollView scrollview = new ScrollView(activity);
+		topLayout.addView(scrollview, FP, heightPixels * 6 / 10);
+
+		field = new TextView(activity);
+		scrollview.addView(field);
+
+		LinearLayout buttonField = new LinearLayout(activity);
 		buttonField.setGravity(Gravity.BOTTOM);
+		buttonField.setOrientation(LinearLayout.VERTICAL);
+		topLayout.addView(buttonField, new LinearLayout.LayoutParams(FP, FP));
+		
 
 		LinearLayout.LayoutParams layoutparamsUpDown =
 			new LinearLayout.LayoutParams(widthPixels / 9,
@@ -63,8 +76,6 @@ class Layout
 		up.setLayoutParams(layoutparamsUpDown);
 		buttonField.addView(up);
 
-//		LinearLayout lrLayout =
-//			(LinearLayout)activity.findViewById(R.id.lrlayout);
 		LinearLayout lrLayout = new LinearLayout(activity);
 		buttonField.addView(lrLayout);
 		LinearLayout.LayoutParams layoutparamsLR =
@@ -79,8 +90,6 @@ class Layout
 		lrLayout.addView(left);
 		lrLayout.addView(right);
 
-//		LinearLayout deLayout =
-//			(LinearLayout)activity.findViewById(R.id.delayout);
 		LinearLayout deLayout = new LinearLayout(activity);
 		buttonField.addView(deLayout, new LinearLayout.LayoutParams(FP, WC));
 
@@ -163,7 +172,7 @@ class Layout
 
 	public TextView getField()
 	{
-		return (TextView)activity.findViewById(R.id.textview);
+		return field;
 	}
 
 	public Button[] getButtons()
