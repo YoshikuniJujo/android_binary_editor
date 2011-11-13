@@ -13,8 +13,16 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.view.Window;
 
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+
+import android.view.Gravity;
+
 class Layout
 {
+	static final int WC = LinearLayout.LayoutParams.WRAP_CONTENT;
+	static final int FP = LinearLayout.LayoutParams.FILL_PARENT;
+
 	public enum ButtonName {
 		Up, Down, Left, Right, Paste, Copy, BackSpace
 	}
@@ -22,6 +30,7 @@ class Layout
 	Activity activity;
 	int widthPixels;
 	int heightPixels;
+	Button down, paste, copy, backspace, left, right;
 
 	Layout(Activity a)
 	{
@@ -37,6 +46,53 @@ class Layout
 		activity = a;
 		widthPixels = metrics.widthPixels;
 		heightPixels = metrics.heightPixels;
+
+		activity.setContentView(mainView());
+
+		LinearLayout lrLayout =
+			(LinearLayout)activity.findViewById(R.id.lrlayout);
+		LinearLayout.LayoutParams layoutparamsLR =
+			new LinearLayout.LayoutParams(widthPixels / 9,
+							heightPixels / 13);
+		layoutparamsLR.setMargins(0, 0, 0, 0);
+
+		left	= new Button(activity);
+		right	= new Button(activity);
+		left.setLayoutParams(layoutparamsLR);
+		right.setLayoutParams(layoutparamsLR);
+		lrLayout.addView(left);
+		lrLayout.addView(right);
+
+		LinearLayout deLayout =
+			(LinearLayout)activity.findViewById(R.id.delayout);
+		LinearLayout downLayout = new LinearLayout(activity);
+		deLayout.addView(downLayout);
+
+		LinearLayout editLayout = new LinearLayout(activity);
+		editLayout.setGravity(Gravity.RIGHT);
+		deLayout.addView(editLayout,
+			new LinearLayout.LayoutParams(FP, WC));
+
+		LinearLayout.LayoutParams layoutparamsDown =
+			new LinearLayout.LayoutParams(widthPixels / 9,
+							heightPixels / 13);
+		LinearLayout.LayoutParams layoutparams =
+			new LinearLayout.LayoutParams(widthPixels / 9,
+							heightPixels / 13);
+		layoutparamsDown.setMargins(widthPixels / 18, 0, 0, 0);
+		layoutparams.setMargins(0, 0, 0, heightPixels / 40);
+		down		= new Button(activity);
+		paste		= new Button(activity);
+		copy		= new Button(activity);
+		backspace	= new Button(activity);
+		down.setLayoutParams(layoutparamsDown);
+		paste.setLayoutParams(layoutparams);
+		copy.setLayoutParams(layoutparams);
+		backspace.setLayoutParams(layoutparams);
+		downLayout.addView(down);
+		editLayout.addView(paste);
+		editLayout.addView(copy);
+		editLayout.addView(backspace);
 	}
 
 	public int mainView()
@@ -78,14 +134,21 @@ class Layout
 
 	public Button getFunctionButton(ButtonName n)
 	{
+
 		Button[] btns = {
 			(Button)activity.findViewById(R.id.up),
+			down, left, right,
+/*
 			(Button)activity.findViewById(R.id.down),
 			(Button)activity.findViewById(R.id.left),
 			(Button)activity.findViewById(R.id.right),
+*/
+			paste, copy, backspace,
+/*
 			(Button)activity.findViewById(R.id.paste),
 			(Button)activity.findViewById(R.id.copy),
 			(Button)activity.findViewById(R.id.backspace),
+*/
 		};
 
 		for (int i = 0; i < btns.length; i++)

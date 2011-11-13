@@ -40,8 +40,6 @@ public class BinEdit extends Activity
 
 		edit		= new Edit();
 		layout		= new Layout(this);
-		setContentView(layout.mainView());
-
 		textview	= layout.getField();
 		setButtonAction();
 
