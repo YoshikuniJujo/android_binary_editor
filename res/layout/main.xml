@@ -25,6 +25,7 @@
 </ScrollView>
 </LinearLayout>
 <LinearLayout
+	android:id="@+id/buttonField"
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
@@ -61,65 +62,19 @@
 	android:paddingBottom="10pt"
 	>
 <LinearLayout
+	android:id="@+id/btn03"
 	android:orientation="horizontal"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:gravity="left"
-	>
-<Button
-	android:id="@+id/btn0"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginRight="2pt"
 	/>
-<Button
-	android:id="@+id/btn1"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginRight="2pt"
-	/>
-<Button
-	android:id="@+id/btn2"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginRight="2pt"
-	/>
-<Button
-	android:id="@+id/btn3"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	/>
-</LinearLayout>
 <LinearLayout
+	android:id="@+id/btn47"
 	android:orientation="horizontal"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:gravity="right"
-	>
-<Button
-	android:id="@+id/btn4"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
 	/>
-<Button
-	android:id="@+id/btn5"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginLeft="2pt"
-	/>
-<Button
-	android:id="@+id/btn6"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginLeft="2pt"
-	/>
-<Button
-	android:id="@+id/btn7"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginLeft="2pt"
-	/>
-</LinearLayout>
 </LinearLayout>
 <LinearLayout
 	android:orientation="horizontal"
@@ -128,65 +83,19 @@
 	android:paddingBottom="10pt"
 	>
 <LinearLayout
+	android:id="@+id/btn8b"
 	android:orientation="horizontal"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:gravity="left"
-	>
-<Button
-	android:id="@+id/btn8"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginRight="2pt"
 	/>
-<Button
-	android:id="@+id/btn9"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginRight="2pt"
-	/>
-<Button
-	android:id="@+id/btna"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginRight="2pt"
-	/>
-<Button
-	android:id="@+id/btnb"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	/>
-</LinearLayout>
 <LinearLayout
+	android:id="@+id/btncf"
 	android:orientation="horizontal"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:gravity="right"
-	>
-<Button
-	android:id="@+id/btnc"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
 	/>
-<Button
-	android:id="@+id/btnd"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginLeft="2pt"
-	/>
-<Button
-	android:id="@+id/btne"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginLeft="2pt"
-	/>
-<Button
-	android:id="@+id/btnf"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginLeft="2pt"
-	/>
-</LinearLayout>
 </LinearLayout>
 </LinearLayout>
 </LinearLayout>
