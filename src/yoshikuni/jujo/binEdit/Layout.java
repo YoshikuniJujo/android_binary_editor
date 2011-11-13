@@ -34,6 +34,7 @@ class Layout
 	private Button up, down, paste, copy, backspace, left, right;
 	private Button[] keys = new Button[16];
 	private TextView field;
+	LinearLayout topLayout;
 
 	Layout(Activity a)
 	{
@@ -50,10 +51,10 @@ class Layout
 		widthPixels = metrics.widthPixels;
 		heightPixels = metrics.heightPixels;
 
-		activity.setContentView(mainView());
+		topLayout = new LinearLayout(activity);
+		topLayout.setOrientation(LinearLayout.VERTICAL);
 
-		LinearLayout topLayout =
-			(LinearLayout)activity.findViewById(R.id.topLayout);
+		activity.setContentView(mainView());
 
 		ScrollView scrollview = new ScrollView(activity);
 		topLayout.addView(scrollview, FP, heightPixels * 6 / 10);
@@ -165,9 +166,9 @@ class Layout
 		btn8f.addView(btncf, new LinearLayout.LayoutParams(FP, WC));
 	}
 
-	public int mainView()
+	public LinearLayout mainView()
 	{
-		return R.layout.main;
+		return topLayout;
 	}
 
 	public TextView getField()
