@@ -1,4 +1,4 @@
-package yoshikuni.jujo.binEdit;
+package yoshikuni.jujo.binaryEditor;
 
 import java.io.*;
 import java.util.*;

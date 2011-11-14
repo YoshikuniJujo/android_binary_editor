@@ -1,4 +1,4 @@
-package yoshikuni.jujo.binEdit;
+package yoshikuni.jujo.binaryEditor;
 
 import java.io.*;
 
@@ -22,10 +22,10 @@ import android.content.SharedPreferences;
 
 import android.widget.Toast;
 
-import yoshikuni.jujo.binEdit.Layout;
-import yoshikuni.jujo.binEdit.Edit;
+import yoshikuni.jujo.binaryEditor.Layout;
+import yoshikuni.jujo.binaryEditor.Edit;
 
-public class BinEdit extends Activity
+public class BinaryEditor extends Activity
 {
 	static private TextView textview;
 	static private Edit edit;

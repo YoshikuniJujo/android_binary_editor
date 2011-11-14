@@ -1,4 +1,4 @@
-package yoshikuni.jujo.binEdit;
+package yoshikuni.jujo.binaryEditor;
 
 import android.app.Activity;
 import android.os.Bundle;

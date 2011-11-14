@@ -1,4 +1,4 @@
-package yoshikuni.jujo.binEdit;
+package yoshikuni.jujo.binaryEditor;
 
 import android.preference.PreferenceActivity;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -35,6 +35,6 @@ public class EditPref extends PreferenceActivity
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 		String key)
 	{
-		BinEdit.handler.post(BinEdit.runnable);
+		BinaryEditor.handler.post(BinaryEditor.runnable);
 	}
 }
