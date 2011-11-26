@@ -9,5 +9,19 @@
 			android:dialogTitle="file path"
 			android:inputType="text"
 			/>
+		<EditTextPreference
+			android:key="blockSize"
+			android:title="block size"
+			android:summary="block size"
+			android:dialogTitle="block size"
+			android:inputType="text"
+			/>
+		<EditTextPreference
+			android:key="blockNumber"
+			android:title="block number"
+			android:summary="block number"
+			android:dialogTitle="block number"
+			android:inputType="text"
+			/>
 	</PreferenceCategory>
 </PreferenceScreen>

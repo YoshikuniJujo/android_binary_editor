@@ -86,6 +86,20 @@ public class BinaryEditor extends Activity
 					textview.setText("read error!");
 				}
 			}
+			if (sp.contains("blockSize") && sp.contains("blockNumber")) {
+				try {
+					edit.setPath(sp.getString("filePath", ""),
+						Integer.parseInt(
+						sp.getString("blockSize", "-1")),
+						Integer.parseInt(
+						sp.getString("blockNumber", "-1")));
+					textview.setText(edit.get());
+				} catch (FileNotFoundException e) {
+					textview.setText("new file ...");
+				} catch (IOException e) {
+					textview.setText("read error!");
+				}
+			}
 		}
 	};
 

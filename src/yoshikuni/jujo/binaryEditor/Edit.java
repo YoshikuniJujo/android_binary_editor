@@ -10,6 +10,8 @@ class Edit
 	int cursor = 0;
 	int high = -1;
 	String path;
+	int blockSize = -1;
+	int blockNumber = -1;
 
 	public static void main(String[] args) throws IOException
 	{
@@ -69,6 +71,35 @@ class Edit
 		return ret;
 	}
 
+	public String get(int lineNum)
+	{
+		String ret = "";
+		int i;
+		if (getCursorY() - lineNum > 0) {
+			i = (getCursorY() - lineNum) * 16;
+		} else {
+			i = 0;
+		}
+		for (; i < contents.size(); i++) {
+			if (i == cursor) {
+				if (high > -1) ret += String.format("%x", high);
+				ret += "_";
+			}
+			ret += String.format("%02x ", contents.get(i));
+			if (i % 16 == 15) ret += "\n";
+		}
+		if (i == cursor) {
+			if (high > -1) ret += String.format("%x", high);
+			ret += "_";
+		}
+		return ret;
+	}
+
+	private int getCursorY()
+	{
+		return cursor / 16;
+	}
+
 	public void push(int n)
 	{
 		if (n > -1) {
@@ -98,6 +129,8 @@ class Edit
 	public void setPath(String p) throws IOException
 	{
 		path = p;
+		contents = new LinkedList<Byte>();
+		cursor = 0;
 		BufferedInputStream bis = new BufferedInputStream(
 			new FileInputStream(p));
 		int b;
@@ -107,14 +140,66 @@ class Edit
 		bis.close();
 	}
 
+	public void setPath(String p, int bs, int bn) throws IOException
+	{
+		if (bs == -1 && bn == -1) {
+			setPath(p);
+			return;
+		}
+		path = p;
+		contents = new LinkedList<Byte>();
+		cursor = 0;
+		blockSize = bs;
+		blockNumber = bn;
+		RandomAccessFile bis = new RandomAccessFile(path, "r");
+		bis.seek(bs * bn);
+		int b;
+		int i = 0;
+		while ((b = bis.read()) > -1 && i < bs) {
+			contents.add((byte)b);
+			i++;
+		}
+		bis.close();
+	}
+
 	public void save() throws IOException
 	{
-		BufferedOutputStream bos = new BufferedOutputStream(
-			new FileOutputStream(path));
-		for (int i = 0; i < contents.size(); i++) {
-			bos.write(contents.get(i));
+		if (blockSize == -1 && blockNumber == -1) {
+			saveWhole();
+			return;
 		}
+		RandomAccessFile bos = new RandomAccessFile(path, "rw");
+		RandomAccessFile bis = new RandomAccessFile(path, "r");
+		int length = blockSize * blockNumber;
+		bos.seek(length);
+		bis.seek(blockSize * (blockNumber + 1));
+		LinkedList<Byte> buffer = new LinkedList<Byte>();
+		Byte b;
+		for (int i = 0; i < contents.size(); i++) {
+			buffer.add(contents.get(i));
+		}
+		int c;
+		while ((c = bis.read()) > -1) {
+			bos.write(buffer.poll());
+			length++;
+			buffer.offer((byte)c);
+		}
+		while ((b = buffer.poll()) != null) {
+			bos.write(b);
+			length++;
+		}
+		bos.setLength(length);
+		bis.close();
 		bos.close();
 	}
 
+	private void saveWhole() throws IOException
+	{
+		RandomAccessFile bos = new RandomAccessFile(path, "rw");
+		for (int i = 0; i < contents.size(); i++) {
+			bos.write(contents.get(i));
+		}
+		bos.setLength(contents.size());
+		bos.close();
+	}
 }
