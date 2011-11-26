@@ -1,0 +1,6 @@
+Need Android SDK to build.
+Add your own local.properties.
+And do 'ant release' or 'ant debug' or so on.
+You can get bin/BinaryEditor-...-unsigned.apk or bin/BinaryEditor-debug.apk.
+If you make by 'ant release', you must sign by jarsigner.
+Then you can install your own apk.
